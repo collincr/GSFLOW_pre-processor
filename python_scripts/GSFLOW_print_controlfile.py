@@ -41,11 +41,18 @@ Converting from GSFLOW_print_controlfile4_gcng_melt30yr.m
 # # NOTE: '/' is directory separator for Linux, '\' for Windows!!
 #==============================================================================
 
+import datetime as dt
 import numpy as np # matlab core
 import scipy as sp # matlab toolboxes
 import matplotlib.pyplot as plt # matlab-like plots
 import os  # os functions
 import settings
+
+def datetime_to_list(datetime):
+    dt_timetuple = datetime.utctimetuple()
+    return [dt_timetuple.tm_year, dt_timetuple.tm_mon,
+            dt_timetuple.tm_mday, dt_timetuple.tm_hour,
+            dt_timetuple.tm_min, dt_timetuple.tm_sec]
 
 # control file that will be written with this script
 # (will be in control_dir with model mode suffix)
@@ -72,19 +79,11 @@ namfil = settings.MODFLOWinput_dir + 'test2lay_py.nam'
 outdir = settings.PRMSoutput_dir
 
 # model start and end dates
-# ymdhms_v = [ 2015  6 16 0 0 0; ...
-#              2016  6 24 0 0 0];
-#ymdhms_v = np.array([[ 2015,  6, 16, 0, 0, 0],
-#                     [ 2020,  6, 15, 0, 0, 0]])
-ymdhms_v = np.array([[ 1990,  4, 23, 0, 0, 0],
-                     [ 2017,  9, 27, 0, 0, 0]])
-# ymdhms_v = [ 2015  6 16 0 0 0; ...
-#              2025  6 15 0 0 0];
-#ymdhms_v = np.array([[ 2015,  6, 16, 0, 0, 0],
-#                     [ 2025,  6, 15, 0, 0, 0]])
-####
-ymdhms_v = np.array([[ 1990,  5, 27, 0, 0, 0],
-                     [ 2017,  9, 27, 0, 0, 0]])
+start_date = dt.datetime.strptime(settings.START_DATE, "%Y-%m-%d")
+end_date = dt.datetime.strptime(settings.END_DATE, "%Y-%m-%d")
+
+ymdhms_v = np.array([datetime_to_list(start_date),
+                     datetime_to_list(end_date)])
 
 #First MODFLOW initial stress period (can be earlier than model start date;
 # useful when using load_init_file and modflow period represents longer 

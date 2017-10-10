@@ -28,6 +28,9 @@ echo "PRMSinput_dir=$PRMSinput_dir" >> "$settings_ini"
 echo "MODFLOWinput_dir=$MODFLOWinput_dir" >> "$settings_ini"
 echo "PRMSoutput_dir=$PRMSoutput_dir" >> "$settings_ini"
 echo "DEM=$DEM" >> "$settings_ini"
+echo "START_DATE=1990-04-23" >> "$settings_ini"
+echo "END_DATE=2017-09-27" >> "$settings_ini"
+
 
 mkdir -p "$control_dir" "$PRMSinput_dir" "$MODFLOWinput_dir" "$PRMSoutput_dir"
 

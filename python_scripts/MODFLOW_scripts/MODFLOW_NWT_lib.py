@@ -430,7 +430,7 @@ def write_ba6_MOD3_2(GSFLOW_indir, infile_pre, mask_fil, dischargept_fil, dis_fi
             IBOUND[dischargePt_rowi,dischargePt_coli] = -1
     IBOUND[dischargePt_rowi-1,dischargePt_coli-1] = 1 # discharge pt
     # hard-code to have active cells below streams 10/2/17 (Santa Rosa)
-    IBOUND[11-1,51-1] = 1
+    #IBOUND[11-1,51-1] = 1
 
     IBOUND[dischargePt_rowi-1,dischargePt_coli-1] = 1 # discharge pt
 

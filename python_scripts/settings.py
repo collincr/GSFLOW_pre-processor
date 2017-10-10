@@ -13,5 +13,7 @@ PRMSoutput_dir = parser.get('settings', 'PRMSoutput_dir')
 # command-line executable for GSFLOW (just used to print message)
 GSFLOW_exe = parser.get('settings', 'gsflow_exe') + '/gsflow'
 DEM = parser.get('settings', 'DEM')
+START_DATE = parser.get('settings', 'start_date')
+END_DATE = parser.get('settings', 'end_date')
 
 PROJ_CODE=PROJ_NAME.replace(" ", "")
