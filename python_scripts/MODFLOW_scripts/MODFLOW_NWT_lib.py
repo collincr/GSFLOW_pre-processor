@@ -24,6 +24,23 @@ GIS_indir = GSFLOW_DIR + "/DataToReadIn/GIS/"
 
 slashstr = '/'
 
+def read_grid_file_header(fname):
+    f = open(fname, 'r')
+    sdata = {}
+    for i in range(6):
+        line = f.readline()
+        line = line.rstrip() # remove newline characters
+        key, value = line.split(': ')
+        try:
+          value = int(value)
+        except:
+          value = float(value)
+        sdata[key] = value
+    f.close()
+
+    return sdata
+ 
+
 
 #%%
 # baesd on: write_nam_MOD_f2_NWT.m
@@ -171,18 +188,7 @@ def write_dis_MOD2_f(GSFLOW_indir, infile_pre, surfz_fil, NLAY, DZ, perlen_tr):
     
     ## ------------------------------------------------------------------------
     # -- Read in data from files
-    f = open(surfz_fil, 'r')
-    sdata = {}
-    for i in range(6):
-        line = f.readline()
-        line = line.rstrip() # remove newline characters
-        key, value = line.split(': ')
-        try:
-          value = int(value)
-        except:
-          value = float(value)
-        sdata[key] = value
-    f.close()
+    sdata = read_grid_file_header(surfz_fil)
         
     NSEW = [sdata['north'], sdata['south'], sdata['east'], sdata['west']]
     NROW = sdata['rows'] 
@@ -317,18 +323,8 @@ def write_ba6_MOD3_2(GSFLOW_indir, infile_pre, mask_fil, dischargept_fil, dis_fi
     # -- IBOUND(NROW,NCOL,NLAY): <0 const head, 0 no flow, >0 variable head
     # use basin mask (set IBOUND>0 within watershed, =0 outside watershed, <0 at discharge point and 2 neighboring pixels)
     # mask_fil = '/home/gcng/workspace/ProjectFiles/AndesWaterResources/Data/GIS/basinmask_dischargept.asc';
-    f = open(mask_fil, 'r')
-    sdata = {}
-    for i in range(6):
-        line = f.readline()
-        line = line.rstrip() # remove newline characters
-        key, value = line.split(': ')
-        try:
-          value = int(value)
-        except:
-          value = float(value)
-        sdata[key] = value
-    f.close()
+    sdata = read_grid_file_header(mask_fil)
+
     NSEW = [sdata['north'], sdata['south'], sdata['east'], sdata['west']]
     NROW = sdata['rows'] 
     NCOL = sdata['cols']
@@ -549,23 +545,11 @@ def write_lpf_MOD2_f2_2(GSFLOW_indir, infile_pre, surfz_fil, NLAY):
     # - domain dimensions, maybe already in surfz_fil and botm_fil{}?
     # NLAY = 2;
     # surfz_fil = '/home/gcng/workspace/ProjectFiles/AndesWaterResources/Data/GIS/topo.asc';
-    f = open(surfz_fil, 'r')
-    sdata = {}
-    for i in range(6):
-        line = f.readline()
-        line = line.rstrip() # remove newline characters
-        key, value = line.split(': ')
-        try:
-          value = int(value)
-        except:
-          value = float(value)
-        sdata[key] = value
-    f.close()
+    sdata = read_grid_file_header(surfz_fil)
         
     NSEW = [sdata['north'], sdata['south'], sdata['east'], sdata['west']]
     NROW = sdata['rows'] 
     NCOL = sdata['cols']
-    print((NROW, NCOL))
 
     # - space discretization
     DELR = (NSEW[2]-NSEW[3])/NCOL # width of column [m]
@@ -764,18 +748,7 @@ def write_upw_MOD2_f2_2(GSFLOW_indir, infile_pre, surfz_fil, NLAY):
     # - domain dimensions, maybe already in surfz_fil and botm_fil{}?
     # NLAY = 2;
     # surfz_fil = '/home/gcng/workspace/ProjectFiles/AndesWaterResources/Data/GIS/topo.asc';
-    f = open(surfz_fil, 'r')
-    sdata = {}
-    for i in range(6):
-        line = f.readline()
-        line = line.rstrip() # remove newline characters
-        key, value = line.split(': ')
-        try:
-          value = int(value)
-        except:
-          value = float(value)
-        sdata[key] = value
-    f.close()
+    sdata = read_grid_file_header(surfz_fil)
         
     NSEW = [sdata['north'], sdata['south'], sdata['east'], sdata['west']]
     NROW = sdata['rows'] 
@@ -1468,18 +1441,7 @@ def make_uzf3_f_2(GSFLOW_indir, infile_pre, surfz_fil, dischargept_fil, ba6_fil)
     uz_file = infile_pre + '.uzf'
     
     # surfz_fil = '/home/gcng/workspace/ProjectFiles/AndesWaterResources/Data/GIS/topo.asc';
-    f = open(surfz_fil, 'r')
-    sdata = {}
-    for i in range(6):
-        line = f.readline()
-        line = line.rstrip() # remove newline characters
-        key, value = line.split(': ')
-        try:
-          value = int(value)
-        except:
-          value = float(value)
-        sdata[key] = value
-    f.close()
+    sdata = read_grid_file_header(surfz_fil)
         
     NSEW = [sdata['north'], sdata['south'], sdata['east'], sdata['west']]
     NROW = sdata['rows'] 

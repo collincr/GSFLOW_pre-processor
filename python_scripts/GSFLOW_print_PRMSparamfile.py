@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt # matlab-like plots
 import os  # os functions
 import pandas as pd # for data structures and reading in data from text file
 from ConfigParser import SafeConfigParser
+from MODFLOW_scripts import MODFLOW_NWT_lib as mf
 import settings
 
 
@@ -103,20 +104,7 @@ HRUdata = pd.read_csv(HRUfil)
 reachdata = pd.read_csv(reachfil)
 gvrdata = pd.read_csv(gvrfil)
 
-f = file(MODfil, 'r')
-MODdata = {}
-for i in range(6):
-    line = f.readline()
-    line = line.rstrip() # remove newline characters
-    key, value = line.split(': ')
-    if key in ["rows", "cols"]:
-        try:
-          value = int(value)
-        except:
-          value = float(value)
-        MODdata[key] = value
-f.close()
-
+MODdata = mf.read_grid_file_header(MODfil)
 
 # 2 lines available for comments
 title_str1 = 'TEST'
