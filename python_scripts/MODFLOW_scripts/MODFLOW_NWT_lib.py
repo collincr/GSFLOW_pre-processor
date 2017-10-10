@@ -12,15 +12,6 @@ This library includes all the separate matlab functions for writing the differen
 import numpy as np
 import pandas as pd # for data structures and reading in data from text file
 import matplotlib.pyplot as plt # matlab-like plots
-from ConfigParser import SafeConfigParser
-
-parser = SafeConfigParser()
-parser.read('settings.ini')
-LOCAL_DIR = parser.get('settings', 'local_dir')
-
-GSFLOW_DIR = LOCAL_DIR + "/GSFLOW"
-
-GIS_indir = GSFLOW_DIR + "/DataToReadIn/GIS/"
 
 slashstr = '/'
 
