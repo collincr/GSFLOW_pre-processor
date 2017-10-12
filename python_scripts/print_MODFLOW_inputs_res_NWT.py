@@ -35,7 +35,7 @@ elif sw_2005_NWT == 2:
     # MODFLOW output files
     GSFLOW_outdir = GSFLOW_DIR + '/outputs/MODFLOW_NWT/'
 
-infile_pre = 'test2lay_py';
+infile_pre = settings.PROJ_CODE
 
 NLAY = 2;
 DZ = [100, 50] # [NLAYx1] [m] ***testing

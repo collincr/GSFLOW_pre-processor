@@ -73,7 +73,7 @@ datafil = settings.PRMSinput_dir + 'empty.day'
 parfil_pre = settings.PROJ_CODE # will have '_', model_mode following
 
 # MODFLOW namefile that the control file will point to (generate with write_nam_MOD.m)
-namfil = settings.MODFLOWinput_dir + 'test2lay_py.nam'
+namfil = settings.MODFLOWinput_dir + settings.PROJ_CODE + '.nam'
 
 # output directory that the control file will point to for creating output files (include slash at end!)
 outdir = settings.PRMSoutput_dir
